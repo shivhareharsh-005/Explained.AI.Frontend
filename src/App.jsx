@@ -1,16 +1,28 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/home.jsx"
+import Login from "./pages/login.jsx";
+import Signup from "./pages/signup.jsx";
+import StartSession from "./pages/StartSession.jsx";
+import ChatSession from "./pages/ChatSession.jsx";
+import SessionComplete from "./pages/SessionComplete.jsx";
+import ProtectedRoute from "./components/ui/ProtectedRoute.jsx";
+import "./App.css";
 
 function App() {
-
   return (
-    <div>
-      harsh shivhare 
-    </div>
-  )
+    <main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/start-session" element={<StartSession />} />
+          <Route path="/session/:sessionId" element={<ChatSession />} />
+          <Route path="/session/:sessionId/complete" element={<SessionComplete />} />
+        </Route>
+      </Routes>
+    </main>
+  );
 }
 
-export default App
+export default App;
